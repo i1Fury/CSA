@@ -1,0 +1,30 @@
+dd.firstpage {
+    width: 8%;
+    text-align: center;
+    line-height: 2.2em;
+}
+
+dd.lastpost {
+    width: 20% !important;
+}
+
+.topicbuttons {
+    padding-left: 2px;
+    padding-right: 2px;
+    margin-right: 0px;
+    display: inline-block !important;
+}
+
+.topicbutton {
+    padding-left: 2px;
+    font-family: "Verdana", Helvetica, Arial, sans-serif;
+    font-size: 1.2em;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.topiclistmessage {
+    font-family: "Verdana", Helvetica, Arial, sans-serif;
+    font-size: 1.2em;
+    font-weight: bold !important;
+}
