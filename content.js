@@ -1,7 +1,16 @@
+/*
+Stuff to do:
+  1. Set default settings
+  2. Check settings before adding elements to the page
+  3. Add listeners for setting changes to add the elements to the page on a setting update
+*/
 const firstPageRefreshDelay = 5000;
-const showClearButton = true;
 const showBumpButton = true;
+const showClearButton = true;
+const showFirstPage = true;
 const bumpMessage = 'Bump';
+
+var autoRefreshFirstPages = null;
 
 
 function getJsonFromUrl(url) {
@@ -207,7 +216,12 @@ async function refreshFirstPages() {
 
 
 // Listen for messages
-chrome.runtime.onMessage.addListener(function (msg, sender) {
+chrome.runtime.onMessage.addListener(async function (msg, sender) {
+    try {
+        await initStorageCache;
+    } catch (e) {
+        // Handle error that occurred during storage initialization.
+    }
     // If the received message has the expected format...
     if (msg.text === 'posts') {
 
@@ -258,6 +272,7 @@ chrome.runtime.onMessage.addListener(function (msg, sender) {
         });
 
         refreshFirstPages();
-        setInterval(refreshFirstPages, firstPageRefreshDelay);
+        autoRefreshFirstPages = setInterval(refreshFirstPages, firstPageRefreshDelay);
+        // clearInterval(autoRefreshFirstPages);
     }
 });
