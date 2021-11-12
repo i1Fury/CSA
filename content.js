@@ -73,6 +73,13 @@ class topicListMessage {
 
 
 async function clear(tlm, f, t, authorId, el) {
+    // Get start page now because the confirmation removes the pagination container
+    var start = 0;
+    try {
+        start = parseInt(getJsonFromUrl(Array.prototype.at.call(el.parentNode.parentNode.getElementsByClassName('pagination')[0].getElementsByTagName('a'), -1).href).start);
+    } catch {}
+
+    // Ask the user for confirmation
     tlm['confirmation'] = false;
     await tlm.set('#5d5d5d', `<span style="font-size: 1em !important;">Are you sure you want to clear all replies? <a class="confirmation" id="yes" href="javascript:void(0);" style="color: #087508; text-decoration: underline;" onclick="void(0)">Yes</a> or <a class="confirmation" id="yes" href="javascript:void(0);" style="color: #750808; text-decoration: underline;" onclick="void(0)">No</a></span>`, delay=5, callback=() => tlm.reset(), precallback=function (resolve) {
         let options = this.dt.getElementsByClassName('confirmation');
@@ -86,10 +93,6 @@ async function clear(tlm, f, t, authorId, el) {
     }
 
     // Step one: fetch every page from last to first
-    var start = 0;
-    try {
-        start = parseInt(getJsonFromUrl(Array.prototype.at.call(el.parentNode.parentNode.getElementsByClassName('pagination')[0].getElementsByTagName('a'), -1).href).start);
-    } catch {}
     var totalPosts = 0;
     var currentPost = 0;
 
@@ -177,7 +180,7 @@ function getFormData(f, t) {
                 formData.append(input.name, input.value);
             });
 
-            formData.append('subject', 'CS Assistant Bump');
+            formData.append('subject', doc.querySelector('#page-body > h2 > a').textContent);
             formData.append('message', bumpMessage + '\n[size=60]Bumped by [url=https://chrome.google.com/webstore/detail/chicken-smoothie-assistan/dlndlacknelkkhombcehoccclpfkpefl]Chicken Smoothie Assistant[/url]![/size]');
             formData.delete('attach_sig');
             formData.delete('disable_bbcode');
