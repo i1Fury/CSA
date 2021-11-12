@@ -28,3 +28,23 @@ dd.lastpost {
     font-size: 1.2em;
     font-weight: bold !important;
 }
+
+dd.firstpage span {
+    display: grid;
+    justify-items: center;
+}
+
+label.position {
+    width: fit-content;
+    font-family: "Verdana", Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    color: #507050;
+    font-size: .8em;
+    margin-top: -12px;
+    margin-bottom: -7px;
+    padding-right: 0;
+    padding-top: 2px;
+    text-align: center;
+    display: inline-block;
+    padding-left: 2px;
+}

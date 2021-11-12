@@ -148,7 +148,7 @@ function post(tlm, f, t, formData, delay) {
 
 async function bump(tlm, f, t, formData, startTime, el) {
     isOnFirstPage(f, t).then(async function (fp) {
-        if (fp) {
+        if (fp.result) {
             refreshFirstPages();
             await tlm.set('#750808', 'You cannot bump a post that is already on the first page of a topic!', 3, () => tlm.reset());
         } else {
@@ -189,7 +189,13 @@ function getFormData(f, t) {
 
 function isOnFirstPage(f, t) {
     return fetch('https://www.chickensmoothie.com/Forum/viewforum.php?f=' + f).then(r => r.text()).then(result => {
-        return result.includes('./viewtopic.php?f=' + f + '&amp;t=' + t);
+        let postURL = `./viewtopic.php?f=${f}&amp;t=${t}`;
+        if (!result.includes(postURL)) { return {result: false}; }
+        return {result: true, position: function (result) {
+            var doc = new DOMParser().parseFromString(result, 'text/html');
+            let unstickyRows = doc.querySelector('#page-body > div:nth-child(6) > div > ul.topiclist.topics').querySelectorAll('.row:not(.sticky)');
+            return `(${(Array.prototype.findIndex.call(unstickyRows, (row) => row.innerHTML.includes(postURL)) + 1).toString().padStart(2, 0)}/${unstickyRows.length})`;
+        }.bind(null, result)};
     });
 }
 
@@ -202,10 +208,11 @@ async function refreshFirstPages() {
         let data = getJsonFromUrl(row.querySelector('dl > dt > a.topictitle').href);
 
         isOnFirstPage(data.f, data.t).then(fp => {
-            if (fp) {
-                row.getElementsByClassName('firstpage')[0].outerHTML = '<dd class="firstpage"><span><font color="#106107" size="3"><b>YES</b></font></span></dd>';
-            } else {
+            if (!fp.result) {
                 row.getElementsByClassName('firstpage')[0].outerHTML = '<dd class="firstpage"><span><font color="#750808" size="3"><b>NO</b></font></span></dd>';
+            } else {
+                row.getElementsByClassName('firstpage')[0].outerHTML = '<dd class="firstpage"><span><font color="#106107" size="3"><b>YES</b></font></span></dd>';
+                row.getElementsByClassName('firstpage')[0].querySelector('span > font').insertAdjacentHTML('afterend', `<label class="position">${fp.position()}</label>`);
             }
         });
     });
