@@ -1,9 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 
 
 /* My CSS */
+p {
+    display: block;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-size: .5em;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+font.bb {
+    color: #ed7947;
+    background-color: #642727;
+    padding: 3px;
+}
+
 .title {
-    font-family: 'Ubuntu', sans-serif;
+    font-family: "Ubuntu", sans-serif;
     font-weight: 700;
     text-align: center;
     margin: 0;
@@ -38,7 +55,7 @@ html {
 }
 
 .setting {
-    font-family: 'Ubuntu', sans-serif;
+    font-family: "Ubuntu", sans-serif;
     font-size: 2em;
     font-weight: 700;
     text-align: left;
@@ -65,14 +82,106 @@ html {
 }
 
 .toggle.show {
-  visibility: visible;
-  opacity: 1;
+    visibility: visible;
+    opacity: 1;
+}
+
+label.text {
+    text-align: center;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 2em;
+    font-weight: 700;
+    color: #4d1904;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+div.text {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 1000ms ease-in;
+    width: 340px;
+    /* display: flex; */
+    padding: 5px;
+    margin: 4px 3px 4px 3px;
+    /* align-items: baseline; */
+    vertical-align: text-bottom;
+    text-align: center;
+    justify-items: center;
+    align-items: center;
+}
+
+div.text.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+div.textbox {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 1000ms ease-in;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 340px;
+    /* display: flex; */
+    padding: 5px;
+    margin: 4px 3px 4px 3px;
+    /* align-items: baseline; */
+    vertical-align: text-bottom;
+    background-color: #ffac47;
+    border-radius: 50px;
+    /* text-align: center; */
+    justify-items: center;
+    align-items: center;
+}
+
+div.textbox.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.setting.textbox {
+    /* padding-top: 5px; */
+    text-align: center;
+    font-size: 2.3em;
+    /* justify-items: center; */
+    /* align-items: center; */
+}
+
+input#bumpmessage {
+    display: inline-flex;
+    /* border-radius: 10px; */
+    border-radius: 50px;
+    border-color: transparent;
+    font-family: "Ubuntu", sans-serif;
+    min-width: 7em;
+    max-width: 14em;
+    min-height: 2em;
+    color: #ff8787;
+    font-size: 1.9em;
+    font-weight: 700;
+    text-align: center;
+    /* margin-top: 5px;
+    margin-bottom: 5px; */
+    margin: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    /* color: #4d1904; */
+    background-color: #642727;
+    /* border-color: white; */
+    border-style: solid;
+    /* border-width: 1px; */
+}
+
+input#bumpmessage:focus {
+    outline: none;
 }
 
 /* Switch CSS */
 
-.knobs, .layer
-{
+.knobs,
+.layer {
     position: absolute;
     top: 0;
     right: 0;
@@ -80,8 +189,7 @@ html {
     left: 0;
 }
 
-.button
-{
+.button {
     position: relative;
     top: 50%;
     /* margin-right: 0;
@@ -95,18 +203,16 @@ html {
     vertical-align: middle;
 }
 
-.button.r, .button.r .layer
-{
+.button.r,
+.button.r .layer {
     border-radius: 100px;
 }
 
-.button.b2
-{
+.button.b2 {
     border-radius: 2px;
 }
 
-.checkbox
-{
+.checkbox {
     position: relative;
     width: 100%;
     height: 100%;
@@ -117,13 +223,11 @@ html {
     z-index: 3;
 }
 
-.knobs
-{
+.knobs {
     z-index: 2;
 }
 
-.layer
-{
+.layer {
     width: 100%;
     background-color: #642727;
     transition: 0.3s ease all;
@@ -131,9 +235,8 @@ html {
 }
 
 /* Button 3 */
-#button-3 .knobs:before
-{
-    content: '';
+#button-3 .knobs:before {
+    content: "";
     position: absolute;
     top: 4px;
     left: 4px;
@@ -150,25 +253,21 @@ html {
     transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
 }
 
-#button-3 .checkbox:active + .knobs:before
-{
+#button-3 .checkbox:active + .knobs:before {
     width: 46px;
     border-radius: 100px;
 }
 
-#button-3 .checkbox:checked:active + .knobs:before
-{
+#button-3 .checkbox:checked:active + .knobs:before {
     margin-left: -26px;
 }
 
-#button-3 .checkbox:checked + .knobs:before
-{
-    content: '';
+#button-3 .checkbox:checked + .knobs:before {
+    content: "";
     left: 42px;
     background-color: #dd4343;
 }
 
-#button-3 .checkbox:checked ~ .layer
-{
+#button-3 .checkbox:checked ~ .layer {
     background-color: #ed7947;
 }

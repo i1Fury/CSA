@@ -1,7 +1,7 @@
 {
     "name": "Chicken Smoothie Assistant",
-    "description": "Checks if your trade post is on the front page or not. More features coming soon!",
-    "version": "1.2",
+    "description": "Checks if your trade post is on the front page or not. Includes a quick bump button, a clear button, and a settings panel.",
+    "version": "1.2.1",
     "manifest_version": 3,
     "background": {
         "service_worker": "background.js"
