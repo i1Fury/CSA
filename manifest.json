@@ -4,7 +4,12 @@
     "version": "1.2.2",
     "manifest_version": 3,
     "background": {
-        "service_worker": "background.js"
+        "scripts": ["background.js"]
+    },
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "ChickenSmoothieAssistant@ECS"
+        }
     },
     "content_scripts": [
         {
